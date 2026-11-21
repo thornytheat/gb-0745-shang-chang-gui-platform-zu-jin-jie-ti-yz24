@@ -1,0 +1,24 @@
+@font-face { font-family: Receipt; src: local("Songti SC"), local("Noto Serif CJK SC"); font-display: swap; }
+:root {
+  --bg: #efefd9;
+  --rail: #272a59;
+  --rail-ink: #f2eecc;
+  --surface: #fcfae9;
+  --surface-2: #f1efda;
+  --ink: #232749;
+  --muted: #565978;
+  --line: #b9b8a1;
+  --line-strong: #3e4384;
+  --accent: #3848a0;
+  --accent-ink: #fffdf0;
+  --ok: #256348;
+  --warn: #8d530e;
+  --bad: #a12c42;
+  --info: #575a6d;
+  --display: Receipt, "Songti SC", SimSun, Georgia, serif;
+  --ui: system-ui, sans-serif;
+  --mono: "Menlo", "Consolas", monospace;
+  --gutter: clamp(14px, 2.6vw, 38px);
+  --panel-gap: 22px;
+  --row-height: 35px;
+}

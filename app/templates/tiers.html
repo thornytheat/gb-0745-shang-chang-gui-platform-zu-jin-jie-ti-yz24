@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% from "ledger.jinja" import register %}
+{% from "bands.jinja" import stair %}
+{% block stage %}
+<div class="receipt-grid">{{ stair(run['分段核算']) }}{{ register('合同月清单', run['分段核算'], ('档段',)) }}</div>
+{% endblock %}

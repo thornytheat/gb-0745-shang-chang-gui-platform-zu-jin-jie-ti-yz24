@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% from "ledger.jinja" import register %}
+{% from "bands.jinja" import stair %}
+{% block stage %}
+<div class="receipt-grid">
+  {{ stair(run['分段核算']) }}
+  <section class="panel ticket">
+    <div class="panel-head"><h2>柜台月结联</h2><button id="print" type="button">打印账单</button></div>
+    <div class="ticket-totals"><span>应缴 · 元</span><strong>{{ run['金额勾稽']['应缴分']|yuan }}</strong></div>
+    <dl>
+    {% for row in run['柜台对账'] %}
+      <div><dt>{{ row['柜台'] }} <span class="status" data-status="{{ row['对账'] }}">{{ row['对账'] }}</span></dt><dd>{{ row['应缴分']|yuan }}</dd></div>
+    {% endfor %}
+    </dl>
+    <div class="stamp">{{ meta['账期'] }} / 月结</div>
+  </section>
+  <div class="receipt-tail">{{ register('收缴勾稽', run['柜台对账']) }}{{ register('跨期调整', run['旧期回冲']) }}</div>
+</div>
+{% endblock %}

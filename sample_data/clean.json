@@ -1,0 +1,75 @@
+{
+  "contracts": [
+    {
+      "shop": "001",
+      "version": "N-A",
+      "start": "2026-10-01",
+      "end": "2027-01-01",
+      "minimum": "0",
+      "tiers": [
+        [
+          "1000",
+          1000
+        ],
+        [
+          null,
+          2000
+        ]
+      ]
+    }
+  ],
+  "holidays": [],
+  "events": [
+    {
+      "id": "S010",
+      "shop": "001",
+      "day": "2026-10-04",
+      "amount": "1200",
+      "kind": "sale"
+    },
+    {
+      "id": "R010",
+      "shop": "001",
+      "day": "2026-10-22",
+      "amount": "50",
+      "kind": "refund",
+      "origin": "S010"
+    },
+    {
+      "id": "S011",
+      "shop": "001",
+      "day": "2026-11-09",
+      "amount": "1200",
+      "kind": "sale"
+    },
+    {
+      "id": "S012",
+      "shop": "001",
+      "day": "2026-11-12",
+      "amount": "300",
+      "kind": "sale"
+    },
+    {
+      "id": "R011",
+      "shop": "001",
+      "day": "2026-11-11",
+      "amount": "100",
+      "kind": "refund",
+      "origin": "S010"
+    },
+    {
+      "id": "R012",
+      "shop": "001",
+      "day": "2026-11-12",
+      "amount": "100",
+      "kind": "refund",
+      "origin": "S011"
+    }
+  ],
+  "statement": [
+    {
+      "shop": "001",
+      "paid": "160"
+    }
+  ]
+}

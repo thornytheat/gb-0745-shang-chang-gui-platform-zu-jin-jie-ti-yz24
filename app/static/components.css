@@ -1,0 +1,52 @@
+button, input, select { font: inherit; }
+button, input, select { min-height: 34px; border: 1px solid var(--line-strong); color: var(--ink); background: var(--surface); border-radius: 0; padding: 4px 8px; }
+button { cursor: pointer; }
+button[type="submit"] { background: var(--accent); color: var(--accent-ink); padding-inline: 16px; }
+button:disabled { opacity: .65; cursor: wait; }
+input[type="file"] { width: min(100%, 208px); }
+:focus-visible { outline: 2px solid #a44a37; outline-offset: 3px; }
+[data-export] { font-size: 13px; text-underline-offset: 4px; }
+.panel { min-width: 0; border: 1px solid var(--line); background: var(--surface); }
+.panel-head { padding: 11px 16px; border-bottom: 1px solid var(--line); display: flex; gap: 10px; justify-content: space-between; align-items: center; }
+.panel-head h2 { margin: 0; font: 700 20px/1.2 var(--display); }
+.panel-head span { color: var(--muted); font: 12px var(--mono); }
+.settlement-band { padding: 13px 16px 9px; border-bottom: 1px dashed var(--line-strong); }
+.settlement-band:last-child { border-bottom: 0; }
+h3 { margin: 0 0 5px; font: 700 16px var(--mono); }
+h3 span { font: 12px var(--ui); color: var(--muted); margin-left: 10px; }
+.steps { display: flex; gap: 3px; align-items: end; min-height: 42px; border-bottom: 2px solid var(--line-strong); }
+.step { background: var(--surface-2); border: 1px solid var(--line); border-bottom: 0; padding: calc(4px + var(--rise)) 8px 4px; flex: 1; min-width: 0; }
+.step small, .step strong { display: block; overflow-wrap: anywhere; }
+.step small { font-size: 10px; }
+.step strong { font-family: var(--mono); }
+dl { margin: 7px 0; display: flex; justify-content: space-between; gap: 6px; }
+dl > div { min-width: 0; }
+dt { color: var(--muted); font-size: 12px; }
+dd { margin: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; overflow-wrap: anywhere; }
+.ticket { border: 0; border-top: 4px double var(--line-strong); border-bottom: 2px dashed var(--line-strong); }
+.ticket dl { display: grid; gap: 0; padding: 0 17px; }
+.ticket dl div { display: flex; align-items: baseline; justify-content: space-between; gap: 6px; border-bottom: 1px dotted var(--line-strong); padding: 9px 0; }
+.ticket-totals { border-bottom: 1px dashed var(--line-strong); margin: 0 17px; display: grid; gap: 7px; padding: 18px 0; }
+.ticket-totals strong { font: 700 clamp(19px, 3vw, 41px) var(--mono); overflow-wrap: anywhere; }
+.stamp { width: max-content; margin: 16px 17px 20px auto; padding: 4px 7px; border: 2px double var(--line-strong); color: var(--accent); font: 11px var(--mono); }
+.status { display: inline-block; color: var(--ok); padding-inline: 4px; border: 1px solid currentColor; margin-left: 3px; }
+.status[data-status="应补"] { color: var(--bad); }
+.status[data-status="应退"], .status[data-status="缺缴款单"] { color: var(--warn); }
+.table-scroll { max-height: 280px; overflow: auto; }
+table { width: 100%; border-spacing: 0; white-space: nowrap; font-size: 12px; }
+th { position: sticky; top: 0; background: var(--surface-2); text-align: left; color: var(--muted); }
+th, td { padding: 0 11px; height: var(--row-height); border-bottom: 1px solid var(--line); }
+tr:last-child td { border: 0; }
+tbody tr:hover { background: var(--surface-2); }
+.num { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.empty, .archive { padding-inline: 16px; }
+.archive { padding-inline-start: 36px; }
+@media print {
+  body { display: block; color: #111; background: white; }
+  .rail, #run-form, #print, [data-export] { display: none; }
+  .topbar, footer, th { position: static; background: white; }
+  .receipt-grid, .receipt-tail { display: block; }
+  .panel, .step { background: white; }
+  .panel { margin-bottom: 14px; break-inside: avoid; }
+  .table-scroll { max-height: none; overflow: visible; }
+}

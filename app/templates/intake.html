@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% from "ledger.jinja" import register %}
+{% block stage %}
+<div class="register-grid">
+  {% for key in keys %}{{ register(key, run[key], ('档段',)) }}{% endfor %}
+</div>
+{% endblock %}

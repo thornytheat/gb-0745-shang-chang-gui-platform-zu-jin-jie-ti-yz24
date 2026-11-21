@@ -1,0 +1,17 @@
+{% macro register(title, rows, excluded=()) %}
+<section class="panel ledger-panel">
+  <div class="panel-head"><h2>{{ title }}</h2><span>{{ rows|length }} 条</span></div>
+  {% if rows %}
+  {% set columns = rows[0].keys()|reject('in', excluded)|list %}
+  <div class="table-scroll" tabindex="0" aria-label="{{ title }}">
+    <table>
+      <thead><tr>{% for col in columns %}<th scope="col" class="{% if col.endswith('分') %}num{% endif %}">{{ col }}</th>{% endfor %}</tr></thead>
+      <tbody>{% for row in rows %}<tr>{% for col in columns %}
+        {% set value = row[col] %}
+        <td class="{% if col.endswith('分') %}num{% endif %}">{% if value is none %}待补{% elif value is string or value is number %}{{ value }}{% else %}{{ value|join('、') }}{% endif %}</td>
+      {% endfor %}</tr>{% endfor %}</tbody>
+    </table>
+  </div>
+  {% else %}<p class="empty">该批次无记录。</p>{% endif %}
+</section>
+{% endmacro %}

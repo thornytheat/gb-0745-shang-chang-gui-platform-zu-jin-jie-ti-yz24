@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }} · 柜台租金阶梯</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='layout.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='components.css') }}">
+  <script type="module" src="{{ url_for('static', filename='run.js') }}"></script>
+</head>
+<body>
+  <aside class="rail">
+    <a class="brand" href="/">柜台租金<br><strong>阶梯结算</strong></a>
+    <nav aria-label="账簿章节">
+      {% for slug, label, package in stages %}
+      <a href="{{ url_for('work', stage=slug, run=meta['批次'], sample=sample) }}" {% if active == slug %}aria-current="page"{% endif %}>{{ label }}</a>
+      {% endfor %}
+    </nav>
+    <small>营运财务 · 月结</small>
+  </aside>
+  <div class="work">
+    <header class="topbar">
+      <div><span>{{ meta['账期'] }}</span><h1>{{ title }}</h1></div>
+      <a data-export href="{{ url_for('export', run_id=meta['批次']) }}">下载结算凭证</a>
+    </header>
+    <main class="content">
+      <section class="kpis" aria-label="月结指标">
+        <div><span>应缴 · 元</span><strong id="due">{{ run['金额勾稽']['应缴分']|yuan }}</strong></div>
+        <div><span>实缴 · 元</span><strong>{{ run['金额勾稽']['实缴分']|yuan }}</strong></div>
+        <div><span>有单差额 · 元</span><strong>{{ run['金额勾稽']['差额分']|yuan }}</strong></div>
+        <div><span>隔离 · 行</span><strong>{{ run['行数勾稽']['隔离'] }}</strong></div>
+        <div><span>行数差额</span><strong>{{ run['行数勾稽']['差额行'] }}</strong></div>
+      </section>
+      <form id="run-form" method="post" action="/api/runs" enctype="multipart/form-data">
+        <input type="hidden" name="stage" value="{{ active }}">
+        <label>账期<input name="period" type="month" required value="{{ meta['账期'] }}"></label>
+        <label>账簿<select name="sample">{% for code, name in samples.items() %}<option value="{{ code }}" {% if code == sample %}selected{% endif %}>{{ name }}</option>{% endfor %}</select></label>
+        <label class="upload">上传 JSON<input type="file" name="file" accept=".json,application/json"></label>
+        <button type="submit">运行结算</button>
+        <output id="run-feedback" role="status">{% if reused %}已复用该批次{% endif %}</output>
+      </form>
+      {% block stage %}{% endblock %}
+    </main>
+    <footer><span>批次 <code>{{ meta['批次'] }}</code></span><span>{{ meta['规则'] }} · {{ meta['生成时间'] }} · {{ meta['营业时区'] }}</span></footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% from "ledger.jinja" import register %}
+{% block stage %}
+<div class="register-grid">
+  <section class="panel"><div class="panel-head"><h2>结算档案</h2><span>{{ history|length }} 批</span></div>
+    <ol class="archive">{% for item in history %}<li><a href="{{ url_for('work', stage='publish', run=item['批次']) }}">{{ item['账期'] }} · {{ item['批次'] }}</a></li>{% endfor %}</ol>
+  </section>
+  {{ register('运行清单', [meta]) }}
+</div>
+{% endblock %}

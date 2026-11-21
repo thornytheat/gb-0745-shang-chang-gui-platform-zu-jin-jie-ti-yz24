@@ -1,0 +1,14 @@
+{% macro stair(rows) %}
+<section class="panel stair-panel">
+  <div class="panel-head"><h2>月结阶梯</h2><span>元</span></div>
+  {% for row in rows %}
+    <article class="settlement-band">
+      <h3>{{ row['柜台'] }}<span>{{ row['版本'] }} · {{ row['计租日'] }} 日</span></h3>
+      <div class="steps" aria-label="分档销售与费率">
+        {% for band in row['档段'] %}<div class="step" style="--rise: {{ band['万分费率'] / 200 }}px"><small>第 {{ loop.index }} 档 · {{ band['万分费率'] / 100 }}%</small><strong>{{ band['计提销售分']|yuan }}</strong></div>{% else %}<span>零计提销售</span>{% endfor %}
+      </div>
+      <dl><div><dt>保底</dt><dd>{{ row['保底分']|yuan }}</dd></div><div><dt>抽成</dt><dd>{{ row['抽成分']|yuan }}</dd></div><div><dt>{{ row['选择'] }}入账</dt><dd>{{ row['应计分']|yuan }}</dd></div></dl>
+    </article>
+  {% else %}<p class="empty">无可计租的合同。</p>{% endfor %}
+</section>
+{% endmacro %}
