@@ -8,6 +8,7 @@ STAGES = (
     ("refunds", "退单回冲", "m5_refunds"),
     ("reconcile", "租金勾稽", "m6_reconcile"),
     ("publish", "结算复核", "m7_publish"),
+    ("corrections", "收银补正", "m8_corrections"),
 )
 
 

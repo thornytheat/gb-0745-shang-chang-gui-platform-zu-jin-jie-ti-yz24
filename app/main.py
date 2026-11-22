@@ -1,10 +1,18 @@
 import os
 
-from app.config import DEFAULT_PERIOD, MAX_SOURCE_BYTES, ROOT, RULE_VERSION, SAMPLES
+from app.config import (
+    DEFAULT_CORRECTION,
+    DEFAULT_PERIOD,
+    MAX_SOURCE_BYTES,
+    ROOT,
+    RULE_VERSION,
+    SAMPLES,
+)
 from app.errors import InputError
 from app.modules import STAGES, register
 from app.modules.m7_publish.export import evidence_pack
 from app.modules.m7_publish.service import run_once
+from app.modules.m8_corrections.correct import run_correction
 from app.store import RunStore
 from app.web import find_run, sample_bytes, store, yuan
 from flask import Flask, abort, jsonify, render_template, request, url_for
@@ -46,6 +54,11 @@ def create_app(config=None):
         chosen = request.args.get("run")
         if chosen:
             run = find_run(chosen)
+        elif stage == "corrections":
+            correction_path = ROOT / "sample_data" / f"{DEFAULT_CORRECTION}.json"
+            run, _ = run_correction(
+                store(), sample_bytes("mall"), correction_path.read_bytes(), DEFAULT_PERIOD
+            )
         else:
             run, _ = run_once(store(), sample_bytes("mall"), DEFAULT_PERIOD)
         keys = {
@@ -56,6 +69,15 @@ def create_app(config=None):
             "refunds": ("旧期回冲", "退单证据"),
             "reconcile": ("柜台对账",),
             "publish": (),
+            "corrections": (
+                "补正采信",
+                "补正隔离",
+                "补正重传",
+                "原流水留档",
+                "柜台出账",
+                "正式账单",
+                "挂起柜台",
+            ),
         }[stage]
         return render_template(
             f"{stage}.html",

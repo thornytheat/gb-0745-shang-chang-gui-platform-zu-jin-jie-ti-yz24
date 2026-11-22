@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% from "ledger.jinja" import register %}
+{% block stage %}
+<div class="correction-banner panel">
+  <div>
+    <h2>出账决策</h2>
+    <p>先出已核对柜台，未解决柜台挂起，不进入正式账单；补正只替换被指向的原流水，原行与补正行不并存。</p>
+  </div>
+  <dl class="decision-kpis">
+    <div><dt>补正采信</dt><dd>{{ run['补正参数']['采信'] }} 条</dd></div>
+    <div><dt>补正隔离</dt><dd>{{ run['补正参数']['隔离'] }} 条</dd></div>
+    <div><dt>补正重传</dt><dd>{{ run['补正参数']['重传'] }} 条</dd></div>
+    <div><dt>可出账柜台</dt><dd>{{ run['正式账单']|length }} 个</dd></div>
+    <div><dt>挂起柜台</dt><dd>{{ run['挂起柜台']|length }} 个</dd></div>
+    <div><dt>正式账单应缴 · 元</dt><dd>{{ run['正式账单合计']['应缴分']|yuan }}</dd></div>
+  </dl>
+</div>
+
+<form id="correction-form" data-run-form class="panel correction-form" method="post" action="/api/corrections" enctype="multipart/form-data">
+  <div class="panel-head"><h2>套用收银补正</h2><span>重跑同份补正只复用，不新增结果</span></div>
+  <div class="form-row">
+    <label>账期<input name="period" type="month" required value="{{ meta['账期'] }}"></label>
+    <label>原账簿<select name="sample">{% for code, name in samples.items() %}<option value="{{ code }}" {% if code == sample %}selected{% endif %}>{{ name }}</option>{% endfor %}</select></label>
+    <label class="upload">补正 JSON<input type="file" name="file" accept=".json,application/json" required></label>
+    <button type="submit">运行补正采信</button>
+  </div>
+  <output id="correction-feedback" role="status">{% if reused %}已复用该补正批次{% endif %}</output>
+</form>
+
+<div class="register-grid">
+  {{ register('补正采信结果', run['补正采信']) }}
+  {{ register('柜台出账判定', run['柜台出账']) }}
+  {{ register('正式账单（仅已核对柜台）', run['正式账单']) }}
+  {{ register('挂起柜台（不入正式账单）', run['挂起柜台']) }}
+  {{ register('补正隔离（未改写任何已核对柜台）', run['补正隔离']) }}
+  {{ register('补正重传（同一条收银只算一次）', run['补正重传']) }}
+  {{ register('原流水留档（原行保留记录）', run['原流水留档']) }}
+</div>
+{% endblock %}

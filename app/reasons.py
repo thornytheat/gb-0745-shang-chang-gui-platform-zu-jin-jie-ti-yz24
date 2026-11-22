@@ -10,6 +10,13 @@ REASONS = {
     "REFUND_LIMIT": "累计退款超过原款",
     "REFUND_SHOP": "退单柜台与原单不同",
     "AFTER_CUT": "晚于结账截止日",
+    "CORR_BAD_ROW": "补正行字段无效",
+    "CORR_NO_TARGET": "补正找不到原流水",
+    "CORR_KIND": "补正与原行交易类型不符",
+    "CORR_SHOP": "补正试图变更柜台",
+    "CORR_TARGET_BUSY": "同一原流水收到多条补正",
+    "CORR_CONFLICT": "同号补正内容冲突",
+    "CORR_BAD_ORIGIN": "退单原单号无效或指向非销售",
 }
 
 

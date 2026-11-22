@@ -32,7 +32,7 @@
         <div><span>隔离 · 行</span><strong>{{ run['行数勾稽']['隔离'] }}</strong></div>
         <div><span>行数差额</span><strong>{{ run['行数勾稽']['差额行'] }}</strong></div>
       </section>
-      <form id="run-form" method="post" action="/api/runs" enctype="multipart/form-data">
+      <form id="run-form" data-run-form method="post" action="/api/runs" enctype="multipart/form-data">
         <input type="hidden" name="stage" value="{{ active }}">
         <label>账期<input name="period" type="month" required value="{{ meta['账期'] }}"></label>
         <label>账簿<select name="sample">{% for code, name in samples.items() %}<option value="{{ code }}" {% if code == sample %}selected{% endif %}>{{ name }}</option>{% endfor %}</select></label>

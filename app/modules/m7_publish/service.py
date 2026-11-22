@@ -15,11 +15,11 @@ from app.modules.m6_reconcile.totals import summary
 from app.reasons import issue
 
 
-def calculate(raw, period):
-    run_id, parameters = input_identity(raw, period)
-    started = perf_counter()
+def pipeline(raw_data, period, run_id, parameters, started=None):
+    """对已解析的账簿字典执行 M1–M6 全链路，生成运行结果。"""
+    if started is None:
+        started = perf_counter()
     start, end = month_window(period)
-    raw_data = open_payload(raw)
     contracts = normalize_contracts(raw_data["contracts"])
     exempt = exempt_days(raw_data["holidays"])
     statement = parse_statement(raw_data["statement"])
@@ -78,6 +78,12 @@ def calculate(raw, period):
             for r in refunds
         ],
     }
+
+
+def calculate(raw, period):
+    run_id, parameters = input_identity(raw, period)
+    started = perf_counter()
+    return pipeline(open_payload(raw), period, run_id, parameters, started)
 
 
 def run_once(store, raw, period):

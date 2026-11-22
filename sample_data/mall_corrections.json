@@ -1,0 +1,121 @@
+{
+  "corrections": [
+    {
+      "id": "C001",
+      "target": "SM03",
+      "shop": "002",
+      "day": "2026-11-19",
+      "kind": "sale",
+      "amount": "660"
+    },
+    {
+      "id": "C002",
+      "target": "SM04",
+      "shop": "003",
+      "day": "2026-11-20",
+      "kind": "sale",
+      "amount": "850"
+    },
+    {
+      "id": "C003",
+      "target": "SM05",
+      "shop": "003",
+      "day": "2026-11-20",
+      "kind": "sale",
+      "amount": "235"
+    },
+    {
+      "id": "C004",
+      "target": "SM08",
+      "shop": "002",
+      "day": "2026-11-16",
+      "kind": "sale",
+      "amount": "20"
+    },
+    {
+      "id": "C005",
+      "target": "RM02",
+      "shop": "001",
+      "day": "2026-11-13",
+      "kind": "refund",
+      "amount": "5",
+      "origin": "S010"
+    },
+    {
+      "id": "C006",
+      "target": "RM03",
+      "shop": "002",
+      "day": "2026-11-20",
+      "kind": "refund",
+      "amount": "5",
+      "origin": "SM01"
+    },
+    {
+      "id": "C901",
+      "target": "NO-SUCH",
+      "shop": "002",
+      "day": "2026-11-19",
+      "kind": "sale",
+      "amount": "100"
+    },
+    {
+      "id": "C902",
+      "target": "SM01",
+      "shop": "004",
+      "day": "2026-11-18",
+      "kind": "sale",
+      "amount": "999"
+    },
+    {
+      "id": "C903",
+      "target": "SM02",
+      "shop": "002",
+      "day": "2026-11-19",
+      "kind": "sale",
+      "amount": "N/A"
+    },
+    {
+      "id": "C001",
+      "target": "SM03",
+      "shop": "002",
+      "day": "2026-11-19",
+      "kind": "sale",
+      "amount": "660"
+    },
+    {
+      "id": "C904",
+      "target": "SM04",
+      "shop": "003",
+      "day": "2026-11-20",
+      "kind": "sale",
+      "amount": "851"
+    },
+    {
+      "id": "C905",
+      "target": "SM01",
+      "shop": "002",
+      "day": "2026-11-18",
+      "kind": "refund",
+      "amount": "1",
+      "origin": "MISSING-SALE"
+    },
+    {
+      "id": "C906",
+      "target": "S011",
+      "shop": "001",
+      "day": "2026-11-09",
+      "kind": "refund",
+      "amount": "10",
+      "origin": "S011"
+    },
+    {
+      "id": "C907",
+      "target": "RM04",
+      "shop": "001",
+      "day": "2026-10-01",
+      "kind": "refund",
+      "amount": "5",
+      "origin": "S010"
+    }
+  ]
+}

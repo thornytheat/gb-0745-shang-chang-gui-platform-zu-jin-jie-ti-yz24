@@ -41,6 +41,19 @@ tbody tr:hover { background: var(--surface-2); }
 .num { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
 .empty, .archive { padding-inline: 16px; }
 .archive { padding-inline-start: 36px; }
+.correction-banner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 16px 18px; margin-bottom: var(--panel-gap); border-left: 4px solid var(--accent); }
+.correction-banner h2 { margin: 0 0 6px; font: 700 20px/1.2 var(--display); }
+.correction-banner p { margin: 0; color: var(--muted); max-width: 52ch; }
+.decision-kpis { display: grid; grid-template-columns: repeat(3, minmax(110px, auto)); gap: 8px 22px; margin: 0; }
+.decision-kpis dt { color: var(--muted); font-size: 12px; }
+.decision-kpis dd { text-align: left; font: 700 17px var(--mono); }
+.correction-form { margin-bottom: var(--panel-gap); }
+.correction-form .form-row { display: flex; flex-wrap: wrap; align-items: end; gap: 9px 17px; padding: 14px 16px; }
+.correction-form label { display: grid; gap: 4px; color: var(--muted); font-size: 12px; }
+.correction-form output { display: block; padding: 0 16px 12px; color: var(--ok); }
+.correction-form output[data-error] { color: var(--bad); }
+.status[data-status="挂起"], .status[data-status="挂起-未核清"] { color: var(--warn); }
+.status[data-status="可出账"] { color: var(--ok); }
 @media print {
   body { display: block; color: #111; background: white; }
   .rail, #run-form, #print, [data-export] { display: none; }
@@ -49,4 +62,5 @@ tbody tr:hover { background: var(--surface-2); }
   .panel, .step { background: white; }
   .panel { margin-bottom: 14px; break-inside: avoid; }
   .table-scroll { max-height: none; overflow: visible; }
+  .correction-form { display: none; }
 }
